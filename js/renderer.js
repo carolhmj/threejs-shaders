@@ -21,7 +21,7 @@ reader.onload = (e) => {
 }
 reader.send();
 
-reader.open("GET", "js/frag.glsl", false);
+reader.open("GET", "js/frag2.glsl", false);
 let fragmentShader;
 reader.onload = (e) => {
 	fragmentShader = reader.responseText;
