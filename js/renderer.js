@@ -35,7 +35,8 @@ var material = new THREE.ShaderMaterial({
 	uniforms: {
 		time: {value: 0.0},
 		texture1: {value: textures[0]},
-		texture2: {value: textures[1]}
+		texture2: {value: textures[1]},
+		screen: {value: [window.innerWidth, window.innerHeight]}
 	}
 });
 
