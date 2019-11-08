@@ -6,6 +6,10 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('container').appendChild(renderer.domElement);
 
+//Load textures
+const textures = [];
+textures[0] = new THREE.TextureLoader().load('../textures/mountains.jpg');
+textures[1] = new THREE.TextureLoader().load('../textures/coffee.jpg');
 
 //Load shaders
 const reader = new XMLHttpRequest();
@@ -29,7 +33,9 @@ var material = new THREE.ShaderMaterial({
 	vertexShader,
 	fragmentShader,
 	uniforms: {
-		time: {value: 0.0}
+		time: {value: 0.0},
+		texture1: {value: textures[0]},
+		texture2: {value: textures[1]}
 	}
 });
 
