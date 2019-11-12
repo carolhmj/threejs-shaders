@@ -3,7 +3,7 @@ varying vec2 vUv;
 uniform float time;
 uniform vec2 screen;
 uniform sampler2D texture1;
-uniform sampler2D texture2;
+uniform sampler2D texture2; 
 
 // Some useful functions
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -79,21 +79,22 @@ float snoise(vec2 v) {
     return 130.0 * dot(m, g);
 }
 
-float parabola(float x) {
-    return 4.0*x*(1.0-x);
+float mixLevel(float t) {
+    return (sin(t) + 1.0)/2.0;
+}
+
+float noiseLevel(float t) {
+    return -abs(sin(t)) + 1.0;
 }
 
 void main() {
     vec2 sUv = (gl_FragCoord.xy - .5*screen.xy)/screen.y;
     sUv *= 5.0;
 
-    vec4 color1 = texture2D(texture1, vUv);
-    vec4 color2 = texture2D(texture2, vUv);
+    float noise = snoise(sUv)*0.05*noiseLevel(time);
 
-    float noise = snoise(sUv);
-    float timeMask = parabola(time);
-    float noiseContrib = noise*timeMask;
+    vec4 color1 = texture2D(texture1, vUv+noise);
+    vec4 color2 = texture2D(texture2, vUv+noise);
 
-    float mask = noise*noiseContrib;
-    gl_FragColor = mix(color1, color2, mask);
+    gl_FragColor = mix(color1, color2, mixLevel(time));
 }

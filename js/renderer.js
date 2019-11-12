@@ -66,7 +66,6 @@ const delta = 0.01;
 const animate = function () {
 	requestAnimationFrame(animate);
 	material.uniforms.time.value += delta * sign;
-	if (material.uniforms.time.value > 1 || material.uniforms.time.value < 0) sign = -sign;
 	renderer.render(scene, camera);
 };
 
