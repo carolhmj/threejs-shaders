@@ -11,8 +11,8 @@ class Renderer {
 
 		//Load textures
 		const textures = [];
-		textures[0] = new THREE.TextureLoader().load('../textures/mountains.jpg');
-		textures[1] = new THREE.TextureLoader().load('../textures/coffee.jpg');
+		textures[0] = new THREE.TextureLoader().load('textures/mountains.jpg');
+		textures[1] = new THREE.TextureLoader().load('textures/coffee.jpg');
 
 		//Load shaders
 		const reader = new XMLHttpRequest();
