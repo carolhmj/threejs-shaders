@@ -1,1 +1,1 @@
-# Simple Three.js starter with shaders
+# WebGL image transitions with shaders using Three.js
