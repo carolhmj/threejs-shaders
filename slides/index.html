@@ -25,8 +25,46 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>Transição de imagens em páginas web utilizando WebGL shaders e Three.js</section>
+				<section class="fig-container" data-file="../index.html"> </section>
+				<section>
+					O que são shaders? O que comem? Onde vivem?
+				</section>
+				<section>	
+						<p>São pequenos programas feitos para rodar na GPU e que processam dados paralelamente. Esses dados podem ser:</p>
+							<ul>
+								<li>Vértices (Vertex shader)</li>
+								<li>Pixels (Fragment shader)</li>
+								<li>Dados arbitrários (Compute shader)</li>
+							</ul>
+						<p>Hoje iremos focar nos fragment shaders.</p>	
+				</section>
+				<section>	
+						<p>Existe uma série de linguagens especializadas para shaders, entre elas GLSL (OpenGL Shading Language) e HLSL (High-Level Shading Language)</p>
+						<p>Um fragment shader típico em GLSL possui a seguinte estrutura:</p>
+						<pre>
+							<code class="glsl" data-line-numbers="1,5,7,9">
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+varying vec2 u_var;
+
+sampler2D tex1;
+
+void main() {
+	vec2 st = gl_FragCoord.xy/u_resolution.xy;
+	st.x *= u_resolution.x/u_resolution.y;
+
+	vec3 color = vec3(0.);
+	color = vec3(st.x,st.y,abs(sin(u_time)));
+
+	gl_FragColor = vec4(color,1.0);
+}
+							</code>
+						</pre>
+					</section>	
+				
 			</div>
 		</div>
 
@@ -41,7 +79,8 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/reveald3/reveald3.js' }
 				]
 			});
 		</script>
