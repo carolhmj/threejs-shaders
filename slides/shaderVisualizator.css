@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container-div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}

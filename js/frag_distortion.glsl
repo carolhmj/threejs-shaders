@@ -91,10 +91,11 @@ void main() {
     vec2 sUv = (gl_FragCoord.xy - .5*screen.xy)/screen.y;
     sUv *= 5.0;
 
-    float noise = snoise(sUv)*0.05*noiseLevel(time);
+    float noiseX = snoise(sUv)*0.05*noiseLevel(time);
+    float noiseY = snoise(sUv + vec2(0.1, 0.4322))*0.05*noiseLevel(time);
 
-    vec4 color1 = texture2D(texture1, vUv+noise);
-    vec4 color2 = texture2D(texture2, vUv+noise);
+    vec4 color1 = texture2D(texture1, vUv+vec2(noiseX, noiseY));
+    vec4 color2 = texture2D(texture2, vUv+vec2(noiseX, noiseY));
 
     gl_FragColor = mix(color1, color2, mixLevel(time));
 }

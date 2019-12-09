@@ -41,27 +41,26 @@ class Renderer {
 		}
 		reader.send();
 
+		this.startTime = Date.now();
+		
+		const uniforms = {
+			time: {value: 0.0},
+			texture1: {value: textures[0]},
+			texture2: {value: textures[1]},
+			screen: {value: [window.innerWidth, window.innerHeight]}
+		};
+
 		const circleMaterial = new THREE.ShaderMaterial({
 			vertexShader,
 			fragmentShader: fragmentShaderCircle,
-			uniforms: {
-				time: {value: 0.0},
-				texture1: {value: textures[0]},
-				texture2: {value: textures[1]},
-				screen: {value: [window.innerWidth, window.innerHeight]}
-			}
+			uniforms: uniforms	
 		});		
 		this.material = circleMaterial;
 		
 		const distortionMaterial = new THREE.ShaderMaterial({
 			vertexShader,
 			fragmentShader: fragmentShaderDistortion,
-			uniforms: {
-				time: {value: 0.0},
-				texture1: {value: textures[0]},
-				texture2: {value: textures[1]},
-				screen: {value: [window.innerWidth, window.innerHeight]}
-			}
+			uniforms: uniforms
 		});
 
 		// Add buttons to switch between shaders
@@ -96,11 +95,8 @@ class Renderer {
 	}
 	
 	animate() {
-		let sign = 1;
-		const delta = 0.01;
-
 		requestAnimationFrame(this.animate.bind(this));
-		this.material.uniforms.time.value += delta * sign;
+		this.materials.uniforms.time.value += Date.now() - this.startTime;
 		this.renderer.render(this.scene, this.camera);
 	};
 }
