@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Pixel coordinates</title>
+        <script src="https://cdn.rawgit.com/gportelli/pocket.gl/v1.2.4/dist/pocket.gl.min.js"></script>
+    </head>
+    <body>
+        <div class="container-div">
+            <div id="container"></div>
+            <script>
+                new PocketGL("container", {
+                    fragmentShaderFile: "smooth.frag",
+                    width: 1240,
+                    height: 960,
+                    uniforms: [
+                      [
+                          {groupName: "Seeds"},
+                          {type: "float", value: 1434.12131, min: 0, max: 10000, name: "seedX", GUIName: "Seed X"},
+                          {type: "float", value: 8172.82763, min: 0, max: 10000, name: "seedY", GUIName: "Seed Y"},
+                          {type: "float", value: 7322.81218, min: 0, max: 10000, name: "multP", GUIName: "Random Multiplier"},
+                          {type: "float", value: 10.0, min: 0, max: 50, name: "coordM", GUIName: "Grid multiplier"}
+                      ]  
+                    ]
+                });
+            </script>
+        </div>
+    </body>
+    <link href="shaderVisualizator.css" rel="stylesheet">
+</html>

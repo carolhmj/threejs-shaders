@@ -25,7 +25,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Transição de imagens em páginas web utilizando WebGL shaders e Three.js</section>
+				<section>Transição de imagens utilizando shaders</section>
 				<section class="fig-container" data-file="../index.html"> </section>
 				<section>
 					O que são shaders? O que comem? Onde vivem?
@@ -51,7 +51,11 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
 void main() {
+	// This is a comment
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
     st.x *= u_resolution.x/u_resolution.y;
 
@@ -98,6 +102,36 @@ void main() {
 					<img src="images/noise3.PNG">
 				</section>
 				<section class="fig-container" data-file="random.html"></section>
+				<section>
+					<p>
+						O problema é que se utilizarmos apenas esses números como nosso ruído, obtemos resultados bem
+						artificiais e nada parecidos com a maneira que o ruído aparece na natureza
+					</p>
+					<img src="images/comp.png">
+				</section>
+				<section>
+					Smooth noise
+				</section>
+				<section>
+					<p>
+						Solução: Divisão dos valores de entrada em células e interpolação entre os valores aleatórios de
+						células vizinhas
+					</p>
+					<img src="images/smooth.PNG">
+				</section>
+				<section class="fig-container" data-file="smooth.html"></section>
+				<section>
+					Transição entre texturas utilizando smooth noise
+				</section>
+				<section class="fig-container" data-file="texturetrans.html"></section>
+				<section>
+					<h4>Referências e links interessantes:</h4>
+					<a href="https://tympanus.net/codrops/2019/11/05/creative-webgl-image-transitions/">Creative WebGL Image Transitions</a>
+					<a href="https://thebookofshaders.com/">The Book of Shaders, by Patricio Gonzalez Vivo and Jen Lowe</a>
+					<a href="https://www.youtube.com/channel/UCcAlTqd9zID6aNX3TzwxJXg">The Art of Code</a>
+					<a href="https://www.shadertoy.com/">Shadertoy</a>
+				</section>
+				<section>Happy coding!</section>
 			</div>
 		</div>
 
@@ -111,6 +145,8 @@ void main() {
 			for (let i = 65; i <= 90; i++) {
 				nullKeycodes[i] = null;
 			}
+			nullKeycodes[190] = null;
+			nullKeycodes[191] = null;
 			Reveal.initialize({
 				keyboard: nullKeycodes,
 				dependencies: [

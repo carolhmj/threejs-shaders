@@ -8,7 +8,7 @@ uniform sampler2D texture2;
 void main() {
     vec2 sUv = (gl_FragCoord.xy - .5*screen.xy)/screen.y;
     float dist = length(sUv);
-    float timeMask = sin(time)/2.0 + 0.5;
+    float timeMask = sin(time-1.5)/2.0 + 0.5;
     float radius = 1.1 * timeMask;
 
     vec4 color1 = texture2D(texture1, vUv);
