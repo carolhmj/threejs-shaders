@@ -41,7 +41,7 @@ class Renderer {
 		}
 		reader.send();
 
-		this.startTime = Date.now();
+		this.lastTime = Date.now();
 		
 		const uniforms = {
 			time: {value: 0.0},
@@ -96,7 +96,9 @@ class Renderer {
 	
 	animate() {
 		requestAnimationFrame(this.animate.bind(this));
-		this.material.uniforms.time.value += Date.now() - this.startTime;
+		const delta = Date.now() - this.lastTime;
+		this.lastTime = Date.now();
+		this.material.uniforms.time.value += delta;
 		this.renderer.render(this.scene, this.camera);
 	};
 }
