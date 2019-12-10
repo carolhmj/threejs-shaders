@@ -96,7 +96,7 @@ class Renderer {
 	
 	animate() {
 		requestAnimationFrame(this.animate.bind(this));
-		this.materials.uniforms.time.value += Date.now() - this.startTime;
+		this.material.uniforms.time.value += Date.now() - this.startTime;
 		this.renderer.render(this.scene, this.camera);
 	};
 }
