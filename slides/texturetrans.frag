@@ -31,10 +31,12 @@ float noise(vec2 uv) {
     return mix(ab, cd, u.y);
 }
 
+// Map a monotonically increasing time value to tha range 0 to 1, starting with a value of mixLevel(0) = 0;
 float mixLevel(float t) {
     return sin(t-1.5)/2.0 + 0.5;
 }
 
+// Map a monotonically increasing time value to the range 0 to 1 in half the time of the mixLevel function
 float noiseLevel(float t) {
     return sin(t*2.0-1.5)/2.0 + 0.5;
 }
@@ -51,11 +53,16 @@ void main()
 	
 	float slowedTime = time * 0.8;
 
+    // Produce noise in the X coordinates
     float noiseX = noise(uv)*0.05;
+    // Multiply the noise by a amount dependent on time
     noiseX *= noiseLevel(slowedTime);
+
+    // Same in the Y coordinate
     float noiseY = noise(uv + vec2(seedX, seedY))*0.05;
     noiseY *= noiseLevel(slowedTime);
 
+    // Sample the textures with a small displacement caused by the noise, this creats the distortion effect
     vec4 color1 = texture2D(texture1, tc + vec2(noiseX, noiseY));
     vec4 color2 = texture2D(texture2, tc + vec2(noiseX, noiseY));
         

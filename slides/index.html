@@ -144,6 +144,8 @@ void main() {
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			let nullKeycodes = {}; 
+			nullKeycodes[32] = null; //Spacebar
+			//Alphanumeric keys
 			for (let i = 65; i <= 90; i++) {
 				nullKeycodes[i] = null;
 			}

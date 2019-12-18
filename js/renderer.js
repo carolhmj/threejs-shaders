@@ -42,6 +42,7 @@ class Renderer {
 		reader.send();
 
 		this.lastTime = Date.now();
+		this.interval = 1 / 6000; //60 FPS
 		
 		const uniforms = {
 			time: {value: 0.0},
@@ -96,10 +97,13 @@ class Renderer {
 	
 	animate() {
 		requestAnimationFrame(this.animate.bind(this));
-		const delta = Date.now() - this.lastTime;
-		this.lastTime = Date.now();
-		this.material.uniforms.time.value += delta;
-		this.renderer.render(this.scene, this.camera);
+		const now = Date.now();
+		const delta = now - this.lastTime;
+		if (delta > this.interval) {
+			this.material.uniforms.time.value += 0.02;
+			this.lastTime = now - (delta % this.interval);
+			this.renderer.render(this.scene, this.camera);
+		}
 	};
 }
 

@@ -27,6 +27,18 @@ float noise(vec2 uv) {
     return mix(ab, cd, u.y);
 }
 
+vec3 visualizeGrid(vec2 uv) {
+    vec2 i = floor(uv);
+    vec2 f = fract(uv);
+    
+    vec3 color = vec3(0.0);
+    
+    if (f.x > 0.98 || f.y > 0.98) color = vec3(0.0, 0.0, 1.0);
+    else color = vec3(f.x, f.y, 0.0);
+    
+    return color;
+}
+
 void main()
 {
     vec2 uv = gl_FragCoord.xy/resolution.xy -.5;
@@ -34,6 +46,10 @@ void main()
 	
 	uv *= coordM;
     
+    // Visualize the formed grid 
+    //vec3 color = visualizeGrid(uv);
+    
+    // Visualize the random colors
     vec3 color = vec3(noise(uv));
     
     gl_FragColor = vec4(vec3(color), 1.0);
